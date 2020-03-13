@@ -1,0 +1,18 @@
+<strong>Manutenção do Cadastro de Sistemas</strong>
+
+{% if sistemas %}
+    <table>
+        <tr>
+            <th>Nome</th>
+            <th>Sigla</th>
+        </tr>
+        {% for sistema in sistemas %}
+            <tr>
+                <td>{{ sistema.nome }}</td>
+                <td>{{ sistema.sigla }}</td>
+            </tr>
+        {% endfor %}
+    </table>
+{% else %}
+    Não há sistemas cadastrados
+{% endif %}

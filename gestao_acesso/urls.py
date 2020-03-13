@@ -1,7 +1,8 @@
-from django.urls import path
+from django.urls import path, include
 
-from . import views
+from gestao_acesso.views import diversos, sistemas
 
 urlpatterns = [
-    path('', views.about, name='about'),
+    path('', diversos.about, name='about'),
+    path('sistemas/', sistemas.index, name='index'),
 ]
