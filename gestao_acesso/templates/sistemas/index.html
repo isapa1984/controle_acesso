@@ -1,18 +1,39 @@
-<strong>Manutenção do Cadastro de Sistemas</strong>
+{% extends 'basic/basic.html' %}
 
-{% if sistemas %}
-    <table>
-        <tr>
-            <th>Nome</th>
-            <th>Sigla</th>
-        </tr>
-        {% for sistema in sistemas %}
-            <tr>
-                <td>{{ sistema.nome }}</td>
-                <td>{{ sistema.sigla }}</td>
-            </tr>
-        {% endfor %}
-    </table>
-{% else %}
-    Não há sistemas cadastrados
-{% endif %}
+{% block body %}
+
+<div class="container">
+
+    <h1 class="mt-3 mb-5"> {{ titulo  }}</h1>
+    
+    <a href="{% url 'gestao_acesso:sistemas:create' %}" class="btn btn-primary mb-3">Novo</a>
+    
+    {% if sistemas %}
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th>Nome</th>
+                    <th>Sigla</th>
+                    <th>Ações</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for sistema in sistemas %}
+                    <tr>
+                        <td>{{ sistema.nome }}</td>
+                        <td>{{ sistema.sigla }}</td>
+                        <td>
+                            <a href="{% url 'gestao_acesso:sistemas:update' sistema.id %}" class="btn btn-primary">Editar</a>
+                            <a href="{% url 'gestao_acesso:sistemas:delete' sistema.id %}" class="btn btn-danger">Excluir</a>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        Não há sistemas cadastrados
+    {% endif %}
+
+</div>
+
+{% endblock body %}

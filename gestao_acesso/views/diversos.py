@@ -1,12 +1,16 @@
 from django.shortcuts import render
 from django.http import HttpResponse
+from django.views.generic import TemplateView
 from gestao_acesso.models import Sistema
+
 
 # Create your views here.
 
-def about(request):
-    sistemas = Sistema.objects.all()
-    str_list = ''.join(f'<li>{sistema.nome}</li>' for sistema in sistemas)
-    return HttpResponse(f'Sistema de Gestão de Acessos<br><br>Lista de Sistemas <ul>{str_list}</ul>')
-
-
+class AboutView(TemplateView):
+    template_name = "diversos/about.html"
+    
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["sistemas"] = Sistema.objects.all()
+        return context
+    

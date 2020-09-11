@@ -1,11 +1,52 @@
-from django.shortcuts import render
+from django.shortcuts import render, reverse
+from django.urls import reverse_lazy
+from django.http import HttpResponseRedirect
+from django.views.generic import ListView
+from django.views.generic.edit import CreateView, UpdateView, DeleteView
+
 from gestao_acesso.models import Sistema
+from gestao_acesso.forms.sistemas import SistemaForm
 
-# Create your views here.
+class SistemaListView(ListView):
+    model = Sistema
+    template_name = "sistemas/index.html"
+    context_object_name = 'sistemas'
 
-def index(request):
-    sistemas = Sistema.objects.order_by('nome')
-    context = {
-        'sistemas': sistemas
-    }
-    return render(request, 'sistemas/index.html', context)
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["titulo"] = 'Lista de Sistemas'
+        return context
+    
+
+# ------------------------------------
+
+class SistemaCreateView(CreateView):
+    model = Sistema
+    fields = '__all__'
+    template_name = "sistemas/form.html"
+    success_url = reverse_lazy('gestao_acesso:sistemas:index') 
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["titulo"] = 'Cadastro de Sistema'
+        return context
+
+# ------------------------------------
+
+class SistemaUpdateView(UpdateView):
+    model = Sistema
+    fields = '__all__'
+    template_name = "sistemas/form.html"
+    success_url = reverse_lazy('gestao_acesso:sistemas:index') 
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["titulo"] = 'Edição de Sistema'
+        return context
+
+# ------------------------------------
+
+class SistemaDeleteView(DeleteView):
+    model = Sistema
+    template_name = "sistemas/confirm_delete.html"
+    success_url = reverse_lazy('gestao_acesso:sistemas:index') 

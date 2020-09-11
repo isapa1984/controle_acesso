@@ -1,0 +1,21 @@
+{% extends 'basic/basic.html' %}
+
+{% block title %}
+<title>Sobre o Gestao de Acesso</title>
+{% endblock title %}
+
+{% block body %}
+
+<h1>Sistema de Gestão de Acessos</h1>
+<p>Lista de Sistemas Cadastrados</p>
+{% if sistemas %}
+    <ul>
+        {% for sistema in sistemas %}
+            <li>{{ sistema.nome }}</li>
+        {% endfor %}
+    </ul>
+{% else %}
+    <p><strong>Não há sistemas cadastrados!</strong></p>
+{% endif %}
+
+{% endblock body %}
