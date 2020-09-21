@@ -6,7 +6,18 @@
     <h1 class="mt-3 mb-5">{{ titulo }}</h1>
     <form method="post">
         {% csrf_token %}
-        {{ form.as_p }}
+        <div class="form-group">
+            <label for="{{ form.nome.id_for_label }}">{{ form.nome.label }}</label>
+            <input type="{{ form.nome.widget_type }}" class="form-control" id="{{ form.nome.auto_id }}" name="{{ form.nome.name }}" value="{{ form.nome.value|default_if_none:"" }}" aria-describedby="emailHelp" >
+            <small id="{{ form.nome.auto_id }}_help" class="form-text text-muted">{{ form.nome.help_text }}</small>
+        </div>
+        <div class="form-group">
+            <label for="{{ form.sigla.id_for_label }}">{{ form.sigla.label }}</label>
+            <input type="{{ form.sigla.widget_type }}" class="form-control" id="{{ form.sigla.auto_id }}" name="{{ form.sigla.name }}" value="{{ form.sigla.value|default_if_none:"" }}" aria-describedby="emailHelp" >
+            <small id="{{ form.sigla.auto_id }}_help" class="form-text text-muted">{{ form.sigla.help_text }}</small>
+        </div>
+        
+        
         <input type="submit" value="Salvar" class="btn btn-primary">
         <a href="{% url 'gestao_acesso:sistemas:index' %}" class="btn btn-primary">Voltar</a>
     </form>
