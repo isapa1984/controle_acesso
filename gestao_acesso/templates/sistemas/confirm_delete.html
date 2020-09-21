@@ -10,7 +10,7 @@
 
     <form method="post" class="mt-5">
         {% csrf_token %}
-        <p>Confirma a remoção do sistema <strong>{{ sistema }}</strong> ?</p>
+        <p>Tem certeza que quer remover o sistema <strong>{{ sistema }}</strong> ?</p>
         <input type="submit" value="Sim" class="btn btn-primary">
         <a href="{% url 'gestao_acesso:sistemas:index' %}" class="btn btn-danger">Não</a>
     </form>
