@@ -120,3 +120,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
 STATIC_URL = '/static/'
+
+LOGIN_URL = '/gestao-acesso/usuarios/login/'
+LOGIN_REDIRECT_URL = '/gestao-acesso/home/'
+LOGOUT_REDIRECT_URL = LOGIN_URL
