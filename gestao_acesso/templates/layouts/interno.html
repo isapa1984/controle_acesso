@@ -1,0 +1,25 @@
+{% extends 'layouts/basic.html' %}
+
+{# Seção do menu #}
+
+{% block navbar %}
+
+<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+</button>
+<div class="collapse navbar-collapse" id="navbarText">
+    <ul class="navbar-nav mr-auto">
+        <li class="nav-item">
+            <a class="nav-link" href="{% url 'gestao_acesso:home' %}">Home</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="{% url 'gestao_acesso:sistemas:list' %}">Sistemas</a>
+        </li>
+    </ul>
+    <span class="navbar-text">
+        {{ user.first_name }}
+    </span>
+    <a class="btn btn-link" href="{% url 'gestao_acesso:logout' %}">Sair</a>
+</div>
+
+{% endblock navbar %}

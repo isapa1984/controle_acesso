@@ -11,13 +11,14 @@ usuarios_patterns = [
 ]
 
 sistemas_patterns = [
-    path('', sistemas.SistemaListView.as_view(), name='index'),
+    path('', sistemas.SistemaListView.as_view(), name='list'),
     path('create/', sistemas.SistemaCreateView.as_view(), name='create'),
     path('update/<int:pk>/', sistemas.SistemaUpdateView.as_view(), name='update'),
     path('delete/<int:pk>/', sistemas.SistemaDeleteView.as_view(), name='delete')
 ]
 
 urlpatterns = [
+    path('', LoginView.as_view(template_name='usuarios/login.html')),
     path('home/', TemplateView.as_view(template_name='diversos/home.html'), name='home'),
     path('usuarios/', include(usuarios_patterns)),
     path('sistemas/', include((sistemas_patterns, 'sistemas'))),

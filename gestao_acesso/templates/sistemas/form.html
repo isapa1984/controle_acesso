@@ -1,4 +1,4 @@
-{% extends 'basic/basic.html' %}
+{% extends 'layouts/interno.html' %}
 {% load i18n %}
 {% block body %}
 
@@ -35,7 +35,7 @@
         
         
         <input type="submit" value="Salvar" class="btn btn-primary">
-        <a href="{% url 'gestao_acesso:sistemas:index' %}" class="btn btn-primary">Voltar</a>
+        <a href="{% url 'gestao_acesso:sistemas:list' %}" class="btn btn-primary">Voltar</a>
     </form>
 </div>
 
