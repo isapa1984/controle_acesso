@@ -3,11 +3,12 @@ from django.urls import reverse_lazy
 from django.http import HttpResponseRedirect
 from django.views.generic import ListView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 from gestao_acesso.models import Sistema
 from gestao_acesso.forms.sistemas import SistemaForm
 
-class SistemaListView(ListView):
+class SistemaListView(LoginRequiredMixin, ListView):
     model = Sistema
     template_name = "sistemas/index.html"
     context_object_name = 'sistemas'
@@ -20,7 +21,7 @@ class SistemaListView(ListView):
 
 # ------------------------------------
 
-class SistemaCreateView(CreateView):
+class SistemaCreateView(LoginRequiredMixin, CreateView):
     model = Sistema
     fields = '__all__'
     template_name = "sistemas/form.html"
@@ -33,7 +34,7 @@ class SistemaCreateView(CreateView):
 
 # ------------------------------------
 
-class SistemaUpdateView(UpdateView):
+class SistemaUpdateView(LoginRequiredMixin, UpdateView):
     model = Sistema
     fields = '__all__'
     template_name = "sistemas/form.html"
@@ -46,7 +47,7 @@ class SistemaUpdateView(UpdateView):
 
 # ------------------------------------
 
-class SistemaDeleteView(DeleteView):
+class SistemaDeleteView(LoginRequiredMixin, DeleteView):
     model = Sistema
     template_name = "sistemas/confirm_delete.html"
     success_url = reverse_lazy('gestao_acesso:sistemas:index') 
