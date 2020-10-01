@@ -11,7 +11,10 @@ class Sistema(models.Model):
 class Perfil(models.Model):
     nome = models.CharField(max_length=250)
     sistema = models.ForeignKey("Sistema", on_delete=models.CASCADE)
-
+    
+    def __str__(self):
+        return self.nome
+    
 
 class Acao(models.Model):
     perfil = models.ForeignKey("Perfil", on_delete=models.CASCADE)

@@ -1,0 +1,47 @@
+{% extends 'layouts/interno.html' %}
+{% load i18n %}
+{% block body %}
+
+<div class="container">
+    
+    <h1 class="mt-3 mb-5">{{ titulo }}</h1>
+    <form method="post">
+        {% csrf_token %}
+        
+        <div class="form-group">
+            <label for="{{ form.sistema.id_for_label }}">{{ form.sistema.label }}</label>
+            <select name="{{ form.sistema.name }}" id="{{ form.sistema.auto_id }}" class="form-control {% if form.sistema.errors %}is-invalid{% endif %}">
+                {% for sistema in sistemas %}<option value="{{ sistema.id }}" {% if sistema.nome == form.sistema.id %}selected{% endif %}>{{ sistema.nome }}</option>{% endfor %}
+            </select>
+            <small id="{{ form.sistema.auto_id }}_help" class="form-text text-muted">{{ form.sistema.help_text }}</small>
+            {% if form.sistema.errors %}
+                <div class="invalid-feedback">
+                    <ul>
+                        {% for erro in form.sistema.errors %} <li>{% trans erro %}</li> {% endfor %}
+                    </ul>
+                </div>
+            {% endif %}
+        </div>
+        
+        <div class="form-group">
+            <label for="{{ form.nome.id_for_label }}">{{ form.nome.label }}</label>
+            <input type="{{ form.nome.widget_type }}" class="form-control {% if form.nome.errors %}is-invalid{% endif %}" id="{{ form.nome.auto_id }}" name="{{ form.nome.name }}" value="{{ form.nome.value|default_if_none:"" }}" aria-describedby="emailHelp" >
+            <small id="{{ form.nome.auto_id }}_help" class="form-text text-muted">{{ form.nome.help_text }}</small>
+            {% if form.nome.errors %}
+                <div class="invalid-feedback">
+                    <ul>
+                        {% for erro in form.nome.errors %} <li> {% trans erro %} </li> {% endfor %}
+                    </ul>
+                </div>
+            {% endif %}
+        </div>
+
+
+        
+        
+        <input type="submit" value="Salvar" class="btn btn-primary">
+        <a href="{% url 'gestao_acesso:perfis:index' %}" class="btn btn-primary">Voltar</a>
+    </form>
+</div>
+
+{% endblock body %}

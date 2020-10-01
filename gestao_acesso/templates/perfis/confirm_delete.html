@@ -1,0 +1,20 @@
+{% extends 'layouts/interno.html' %}
+
+{% block title %}
+    <title>Confirma remoção ?</title>
+{% endblock title %}
+
+{% block body %}
+
+<div class="container">
+
+    <form method="post" class="mt-5">
+        {% csrf_token %}
+        <p>Tem certeza que desaja remover o perfil <strong>{{ perfil.nome }}</strong> do sistema <strong>{{ perfil.sistema.nome }}</strong> ?</p>
+        <input type="submit" value="Sim" class="btn btn-primary">
+        <a href="{% url 'gestao_acesso:perfis:index' %}" class="btn btn-danger">Não</a>
+    </form>
+
+</div>
+
+{% endblock body %}
