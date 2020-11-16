@@ -6,18 +6,32 @@ from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.contrib.auth.mixins import LoginRequiredMixin
 
 from gestao_acesso.models import Sistema
-from gestao_acesso.forms.sistemas import SistemaForm
+from gestao_acesso.forms.sistemas import SistemaForm, BuscaSistemaForm
 
 class SistemaListView(LoginRequiredMixin, ListView):
-    model = Sistema
     template_name = "sistemas/index.html"
     context_object_name = 'sistemas'
+    
+    def get_queryset(self):
+        queryset = Sistema.objects.all()
+        
+        form_busca = BuscaSistemaForm(self.request.GET)
+        
+        if form_busca['nome'].data:
+            queryset = queryset.filter(nome__icontains=form_busca['nome'].data)
 
+        if form_busca['sigla'].data:
+            queryset = queryset.filter(sigla__icontains=form_busca['sigla'].data)
+        
+        return queryset
+    
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
+        
         context["titulo"] = 'Lista de Sistemas'
+        context["form_busca"] = BuscaSistemaForm(self.request.GET)
+        
         return context
-    
 
 # ------------------------------------
 

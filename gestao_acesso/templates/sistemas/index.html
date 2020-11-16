@@ -4,12 +4,36 @@
 
 <div class="container">
 
-    <h1 class="mt-3 mb-5"> {{ titulo  }}</h1>
-    
-    <a href="{% url 'gestao_acesso:sistemas:create' %}" class="btn btn-primary mb-3">Novo</a>
-    
+    <div class="card mt-5">
+        <div class="card-header">{{ titulo }}</div>
+        <div class="card-body">
+            <form>
+                <div class="row">
+                    <div class="col">
+                        <div class="form-group">
+                            <label for="{{ form_busca.nome.id_for_label }}">{{ form_busca.nome.label }}</label>
+                            <input type="{{ form_busca.nome.widget_type }}" id="{{ form_busca.nome.auto_id }}" name="{{ form_busca.nome.name }}" class="form-control" value="{{ form_busca.nome.value|default_if_none:'' }}">
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="form-group">
+                            <label for="{{ form_busca.sigla.id_for_label }}">{{ form_busca.sigla.label }}</label>
+                            <input type="{{ form_busca.sigla.widget_type }}" id="{{ form_busca.sigla.auto_id }}" name="{{ form_busca.sigla.name }}" class="form-control" value="{{ form_busca.sigla.value|default_if_none:'' }}">
+                        </div>
+                    </div>
+                </div>
+                
+
+
+                
+                <input type="submit" value="Pesquisar" class="btn btn-primary">
+                <a href="{% url 'gestao_acesso:sistemas:create' %}" class="btn btn-primary">Novo</a>
+            </form>
+        </div>
+    </div>
+
     {% if sistemas %}
-        <table class="table table-hover">
+        <table class="table table-hover mt-3">
             <thead>
                 <tr>
                     <th>Nome</th>
@@ -33,6 +57,8 @@
     {% else %}
         Não há sistemas cadastrados
     {% endif %}
+
+
 
 </div>
 
